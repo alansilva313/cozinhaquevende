@@ -23,11 +23,11 @@ Os arquivos prontos para publicação ficam em `dist/`.
 
 ## Publicar na Cloudflare Pages
 
-Use o diretório `outputs/cozinha-que-rende-app` como raiz do projeto (ou envie apenas o conteúdo desta pasta). Configure:
+Este repositório já contém o conteúdo do site na raiz. Na Cloudflare Pages, configure:
 
 - **Build command:** `npm run build`
 - **Build output directory:** `dist`
-- **Root directory:** `outputs/cozinha-que-rende-app`, se publicar a partir de um repositório que contém a pasta `outputs`.
+- **Root directory:** `/` (raiz do repositório).
 
 O arquivo `public/_redirects` configura o fallback para as rotas do React Router e é copiado para `dist/_redirects` no build.
 
@@ -45,4 +45,3 @@ As receitas dos guias são fichas-piloto educativas, não receitas comercialment
 ## Acesso local e vendas
 
 O primeiro acesso pede usuário e senha, cria um perfil neste navegador e mantém a sessão no dispositivo. A senha não é enviada ao servidor; o site guarda um hash local. Como a versão é estática e não consulta uma lista de compradores, esse fluxo não valida pagamentos nem protege o conteúdo contra quem obtiver o endereço ou alterar os dados locais. Para restringir o acesso a compradores, conecte uma autenticação e validação de pagamento antes da venda.
-
