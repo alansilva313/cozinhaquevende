@@ -1,0 +1,10 @@
+export type Ingredient = { name: string; amount: number; unit: string };
+export type Recipe = { id: string; title: string; business: string; category: string; ingredients: Ingredient[] };
+export const shoppingRecipes: Recipe[] = [
+  {id:'acai-300',title:'Açaí clássico · copo 300 ml',business:'Açaí no copo',category:'Gelados',ingredients:[{name:'Base de açaí',amount:240,unit:'g'},{name:'Banana',amount:35,unit:'g'},{name:'Granola',amount:20,unit:'g'},{name:'Leite em pó',amount:10,unit:'g'}]},
+  {id:'acai-500',title:'Açaí com frutas · copo 500 ml',business:'Açaí no copo',category:'Gelados',ingredients:[{name:'Base de açaí',amount:390,unit:'g'},{name:'Banana',amount:45,unit:'g'},{name:'Morango',amount:35,unit:'g'},{name:'Granola',amount:30,unit:'g'},{name:'Leite em pó',amount:15,unit:'g'}]},
+  {id:'acai-700',title:'Açaí para compartilhar · copo 700 ml',business:'Açaí no copo',category:'Gelados',ingredients:[{name:'Base de açaí',amount:540,unit:'g'},{name:'Banana',amount:60,unit:'g'},{name:'Morango',amount:45,unit:'g'},{name:'Granola',amount:40,unit:'g'},{name:'Leite em pó',amount:20,unit:'g'}]},
+  {id:'brownie',title:'Brownie de chocolate',business:'Brownies',category:'Doces',ingredients:[{name:'Chocolate meio amargo',amount:150,unit:'g'},{name:'Manteiga',amount:100,unit:'g'},{name:'Ovos',amount:2,unit:'un'},{name:'Açúcar',amount:150,unit:'g'},{name:'Farinha de trigo',amount:65,unit:'g'},{name:'Cacau em pó',amount:20,unit:'g'}]},
+  {id:'palha',title:'Palha italiana',business:'Palha italiana',category:'Doces',ingredients:[{name:'Leite condensado',amount:395,unit:'g'},{name:'Chocolate em pó',amount:20,unit:'g'},{name:'Manteiga',amount:15,unit:'g'},{name:'Biscoito maisena',amount:100,unit:'g'}]},
+  {id:'bolo-banana',title:'Bolo de banana com canela',business:'Bolos caseiros',category:'Assados',ingredients:[{name:'Banana madura',amount:300,unit:'g'},{name:'Ovos',amount:2,unit:'un'},{name:'Óleo',amount:120,unit:'ml'},{name:'Açúcar',amount:180,unit:'g'},{name:'Farinha de trigo',amount:240,unit:'g'},{name:'Fermento químico',amount:12,unit:'g'}]},
+];
