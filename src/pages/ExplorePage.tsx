@@ -1,0 +1,15 @@
+import { ArrowDownWideNarrow, Search, SlidersHorizontal } from 'lucide-react';
+import { Link, useParams } from 'react-router-dom';
+import { useMemo, useState } from 'react';
+import { businesses, categories, type Category } from '../data/businesses';
+import { BusinessCard } from '../components/BusinessCard';
+
+function BusinessCatalog({initialCategory}:{initialCategory?:Category}){
+  const [query,setQuery]=useState('');
+  const [category,setCategory]=useState<Category|''>(initialCategory??'');
+  const [onlyReady,setOnlyReady]=useState(false);
+  const filtered=useMemo(()=>businesses.filter(b=>b.name.toLocaleLowerCase('pt-BR').includes(query.toLocaleLowerCase('pt-BR'))||b.description.toLocaleLowerCase('pt-BR').includes(query.toLocaleLowerCase('pt-BR'))).filter(b=>!category||b.category===category).filter(b=>!onlyReady||b.status==='complete'),[query,category,onlyReady]);
+  return <><div className="catalog-tools"><label className="search-box"><Search size={17}/><input value={query} onChange={e=>setQuery(e.target.value)} placeholder="Pesquise um negócio ou alimento" aria-label="Pesquise um negócio"/><kbd>⌘ K</kbd></label><button className={`filter-toggle ${onlyReady?'active':''}`} onClick={()=>setOnlyReady(!onlyReady)}><SlidersHorizontal size={15}/>{onlyReady?'Guias disponíveis':'Todos os conteúdos'}</button></div><div className="category-pills"><button className={!category?'active':''} onClick={()=>setCategory('')}>Todas <span>50</span></button>{categories.map(c=><button key={c} className={category===c?'active':''} onClick={()=>setCategory(category===c?'':c)}>{c} <span>{businesses.filter(b=>b.category===c).length}</span></button>)}</div><div className="results-label"><span>{filtered.length} oportunidades</span><span><ArrowDownWideNarrow size={14}/> Categorias organizadas para explorar</span></div>{filtered.length?<div className="catalog-grid">{filtered.map(b=><BusinessCard key={b.id} business={b}/>)}</div>:<div className="empty-state"><Search size={24}/><h3>Nenhum resultado</h3><p>Tente outra busca ou remova um filtro.</p></div>}</>;
+}
+export function ExplorePage(){return <div className="content-page"><div className="page-heading"><p className="eyebrow">BIBLIOTECA · 50 OPORTUNIDADES</p><h1>Encontre uma ideia<br/><em>que combine com você.</em></h1><p>Explore negócios de alimentação em casa, compare formatos e abra o guia disponível para planejar seus primeiros passos.</p></div><BusinessCatalog/></div>}
+export function CategoryPage(){const {slug}=useParams();const index=Number(slug);const category=Number.isInteger(index)?categories[index]:categories.find(item=>item.toLocaleLowerCase('pt-BR').replaceAll(' ','-')===slug);if(!category)return <ExplorePage/>;return <div className="content-page"><div className="page-heading compact-heading"><Link to="/explorar" className="back-link">‹ Todas as oportunidades</Link><p className="eyebrow">CATEGORIA</p><h1>{category}</h1><p>Ideias e formatos para pesquisar dentro desta categoria.</p></div><BusinessCatalog initialCategory={category}/></div>}
